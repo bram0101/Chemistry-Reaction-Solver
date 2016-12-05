@@ -11,55 +11,23 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTH
 DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 THE USE OR OTHER DEALINGS IN THE SOFTWARE.*/
 
-package me.brams.chemeq.formula;
+package me.brams.chemeq;
+
+import me.brams.chemeq.formula.Formula;
+import me.brams.chemeq.formula.FormulaBuilder;
 
 /**
- * This class holds an element.
+ * A test class to see how FormulaBuilder parses the string
+ * and print it out.
  * @author Bram
  *
  */
-public class Element {
-	
-	/**Amount of atoms in this element*/
-	private int factor;
-	/**The name of the element*/
-	private String element;
-	
-	/**
-	 * Constructor
-	 * @param element
-	 * @param factor
-	 */
-	public Element(String element, int factor) {
-		this.element = element;
-		this.factor = factor;
+public class TestFormulaBuilder {
+
+	public static void main(String[] args) {
+		String formula = "4(FeO2) + (H2O) -> 1(Fe)+ 2(H2)+(O2)";
+		Formula f = FormulaBuilder.getFormulaFromString(formula);
+		System.out.println(f.toString());
 	}
-	
-	/**
-	 * Getter for element
-	 * @return
-	 */
-	public String getElement() {
-		return element;
-	}
-	
-	/**
-	 * Getter for factor
-	 * @return
-	 */
-	public int getFactor() {
-		return factor;
-	}
-	
-	/**
-	 * Convert the data this class holds to a string
-	 */
-	public String toString() {
-		if(factor == 1) {
-			return element;
-		}else {
-			return element + factor;
-		}
-	}
-	
+
 }

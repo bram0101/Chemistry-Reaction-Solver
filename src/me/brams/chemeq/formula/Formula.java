@@ -22,26 +22,67 @@ import java.util.List;
  */
 public class Formula {
 	
+	/**Holds the molecules on the left side*/
 	private List<Molecule> leftTerm;
+	/**Holds the molecules on the right side*/
 	private List<Molecule> rightTerm;
+	/**Holds all the elements in it*/
 	private List<Element> elements;
 	
+	/**
+	 * Constructor
+	 * @param leftTerm
+	 * @param rightTerm
+	 * @param elements
+	 */
 	public Formula(List<Molecule> leftTerm, List<Molecule> rightTerm, List<Element> elements) {
 		this.leftTerm = leftTerm;
 		this.rightTerm = rightTerm;
 		this.elements = elements;
 	}
 
+	/**
+	 * Getter for left term
+	 * @return
+	 */
 	public List<Molecule> getLeftTerm() {
 		return leftTerm;
 	}
 
+	/**
+	 * Getter for right term
+	 * @return
+	 */
 	public List<Molecule> getRightTerm() {
 		return rightTerm;
 	}
 
+	/**
+	 * Getter for elements
+	 * @return
+	 */
 	public List<Element> getElements() {
 		return elements;
+	}
+	
+	/**
+	 * Convert the data this class holds to a string
+	 */
+	public String toString() {
+		String string = "Formula: { Equation: { ";
+		for(Molecule m : leftTerm) {
+			string = string + m.toString() + " + ";
+		}
+		string = string.substring(0, string.length() - 2) + "-> ";
+		for(Molecule m : rightTerm) {
+			string = string + m.toString() + " + ";
+		}
+		string = string.substring(0, string.length() - 2) + " }, Elements: {";
+		for(Element e : elements) {
+			string = string + e.toString() + ", ";
+		}
+		string = string.substring(0, string.length() - 1) + "} }";
+		return string;
 	}
 	
 }

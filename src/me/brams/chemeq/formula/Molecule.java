@@ -22,18 +22,30 @@ import java.util.List;
  */
 public class Molecule {
 	
+	/**The amount of molecules*/
 	private double coefficient;
+	/**The elements this molecule is made out of*/
 	private List<Element> elements;
 	
+	/**Constructor*/
 	public Molecule(List<Element> elements, double coefficient) {
 		this.elements = elements;
 		this.coefficient = coefficient;
 	}
 	
+	/**
+	 * Getter for elements
+	 * @return
+	 */
 	public List<Element> getElements(){
 		return elements;
 	}
 	
+	/**
+	 * Check if element is in this molecule
+	 * @param element
+	 * @return
+	 */
 	public boolean hasElement(String element) {
 		for(Element e : elements)
 			if(e.getElement().equals(element))
@@ -41,6 +53,11 @@ public class Molecule {
 		return false;
 	}
 	
+	/**
+	 * Get the amount of elements in this molecule
+	 * @param element
+	 * @return
+	 */
 	public int getElementFactor(String element) {
 		for(Element e : elements)
 			if(e.getElement().equals(element))
@@ -48,6 +65,11 @@ public class Molecule {
 		return 0;
 	}
 	
+	/**
+	 * Get the element class
+	 * @param element
+	 * @return
+	 */
 	public Element getElement(String element) {
 		for(Element e : elements)
 			if(e.getElement().equals(element))
@@ -55,12 +77,32 @@ public class Molecule {
 		return null;
 	}
 	
+	/**
+	 * Getter for coefficient
+	 * @return
+	 */
 	public double getCoefficient() {
 		return coefficient;
 	}
 	
+	/**
+	 * Setter for coefficient
+	 * @param coefficient
+	 */
 	public void setCoefficient(double coefficient) {
 		this.coefficient = coefficient;
+	}
+	
+	/**
+	 * Convert the data this class holds to a string
+	 */
+	public String toString() {
+		String string = coefficient + "(";
+		for(Element e : elements) {
+			string = string + e.toString();
+		}
+		string = string + ")";
+		return string;
 	}
 	
 }
