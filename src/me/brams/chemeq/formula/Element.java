@@ -52,6 +52,14 @@ public class Element {
 	}
 	
 	/**
+	 * Setter for factor
+	 * @param factor
+	 */
+	public void setFactor(int factor) {
+		this.factor = factor;
+	}
+	
+	/**
 	 * Convert the data this class holds to a string
 	 */
 	public String toString() {

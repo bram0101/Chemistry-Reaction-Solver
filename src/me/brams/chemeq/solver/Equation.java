@@ -11,77 +11,65 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTH
 DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 THE USE OR OTHER DEALINGS IN THE SOFTWARE.*/
 
-package me.brams.chemeq.formula;
+package me.brams.chemeq.solver;
 
 import java.util.List;
 
-/**
- * This holds the formula.
- * @author Bram
- *
- */
-public class Formula {
+public class Equation {
 	
-	/**Holds the molecules on the left side*/
-	private List<Molecule> leftTerm;
-	/**Holds the molecules on the right side*/
-	private List<Molecule> rightTerm;
-	/**Holds all the elements in it*/
-	private List<Element> elements;
+	/**The end for this equation*/
+	private Term resultTerm;
+	/**The list of terms in the equation*/
+	private List<Term> terms;
 	
 	/**
 	 * Constructor
-	 * @param leftTerm
-	 * @param rightTerm
-	 * @param elements
+	 * @param resultTerm
+	 * @param terms
 	 */
-	public Formula(List<Molecule> leftTerm, List<Molecule> rightTerm, List<Element> elements) {
-		this.leftTerm = leftTerm;
-		this.rightTerm = rightTerm;
-		this.elements = elements;
+	public Equation(Term resultTerm, List<Term> terms) {
+		this.resultTerm = resultTerm;
+		this.terms = terms;
 	}
-
+	
 	/**
-	 * Getter for left term
+	 * Getter for result term
 	 * @return
 	 */
-	public List<Molecule> getLeftTerm() {
-		return leftTerm;
+	public Term getResultTerm() {
+		return resultTerm;
 	}
-
+	
 	/**
-	 * Getter for right term
+	 * Getter for terms
 	 * @return
 	 */
-	public List<Molecule> getRightTerm() {
-		return rightTerm;
+	public List<Term> getTerms(){
+		return terms;
 	}
-
+	
 	/**
-	 * Getter for elements
+	 * Checks if the equation needs a specific term
+	 * @param termOffset
 	 * @return
 	 */
-	public List<Element> getElements() {
-		return elements;
+	public boolean needsTerm(int termOffset) {
+		for(Term t : terms) {
+			if(t.getName() == (Term.startName + termOffset))
+				return true;
+		}
+		return false;
 	}
 	
 	/**
 	 * Convert the data this class holds to a string
 	 */
 	public String toString() {
-		String string = "Formula: { Equation: { ";
-		for(Molecule m : leftTerm) {
-			string = string + m.toString() + " + ";
+		String string = "Equation: { " + resultTerm.toString() + " = ";
+		for(Term t : terms) {
+			string = string + t.toString() + " + ";
 		}
-		string = string.substring(0, string.length() - 2) + "-> ";
-		for(Molecule m : rightTerm) {
-			string = string + m.toString() + " + ";
-		}
-		string = string.substring(0, string.length() - 2) + "}, Elements: {";
-		for(Element e : elements) {
-			string = string + e.toString() + ", ";
-		}
-		string = string.substring(0, string.length() - 1) + "} }";
+		string = string.substring(0, string.length() - 2) + "}";
 		return string;
 	}
 	

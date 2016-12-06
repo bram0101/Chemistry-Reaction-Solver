@@ -25,7 +25,7 @@ import me.brams.chemeq.formula.FormulaBuilder;
 public class TestFormulaBuilder {
 
 	public static void main(String[] args) {
-		String formula = "4(FeO2) + (H2O) -> 1(Fe)+ 2(H2)+(O2)";
+		String formula = "4(FeO2Fe) + (H2O) -> 1(Fe)+ 2(H2)+(O2)";
 		Formula f = FormulaBuilder.getFormulaFromString(formula);
 		System.out.println(f.toString());
 	}

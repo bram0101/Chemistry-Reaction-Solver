@@ -11,52 +11,25 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTH
 DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 THE USE OR OTHER DEALINGS IN THE SOFTWARE.*/
 
-package me.brams.chemeq.solver;
+package me.brams.chemeq;
 
-public class Term {
+import me.brams.chemeq.formula.Formula;
+import me.brams.chemeq.formula.FormulaBuilder;
+import me.brams.chemeq.solver.Solver;
+
+/**
+ * A test class to test the solver
+ * @author Bram
+ *
+ */
+public class TestSolver {
 	
-	/**The first name for a term*/
-	public static final char startName = 'A';
-	
-	/**Name for the term*/
-	private char name;
-	/**The factor for the term*/
-	private double factor;
-	
-	public Term(int nameOffset, double factor) {
-		name = (char) (startName + nameOffset);
-		this.factor = factor;
-	}
-	
-	/**
-	 * Getter for name
-	 * @return
-	 */
-	public char getName() {
-		return name;
-	}
-	
-	/**
-	 * Getter for factor
-	 * @return
-	 */
-	public double getFactor() {
-		return factor;
-	}
-	
-	/**
-	 * Setter for factor
-	 * @param factor
-	 */
-	public void setFactor(double factor) {
-		this.factor = factor;
-	}
-	
-	/**
-	 * Convert the data this class holds to a string
-	 */
-	public String toString() {
-		return Double.toString(factor) + Character.toString(name);
+	public static void main(String[] args) {
+		//String formula = "(K) + (Br2) -> (KBr)";
+		String formula = "(FeS2) + (O2) -> (Fe2O3) + (SO2)";
+		Formula f = FormulaBuilder.getFormulaFromString(formula);
+		System.out.println(f.toString() + "\n");
+		Solver.solve(f);
 	}
 	
 }
