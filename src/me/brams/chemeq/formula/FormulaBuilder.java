@@ -43,7 +43,10 @@ public class FormulaBuilder {
 					String elementName = c + "";
 					if (i < input.length() - 1) {
 						char nc = input.charAt(++i);
-						while (Character.isLowerCase(nc)) {
+						while (true) {
+							if(!Character.isLowerCase(nc) || !Character.isAlphabetic(nc)) {
+								break;
+							}
 							elementName = elementName + nc;
 							if (i >= input.length() - 1) break;
 							nc = input.charAt(++i);
@@ -57,15 +60,28 @@ public class FormulaBuilder {
 					if (exists) continue;
 					//Try to get the number after it with the same logic as with the name
 					int factor = 1;
-					if (i < input.length() - 1) {
+					c = input.charAt(i);
+					if (c >= '0' && c <= '9' && i < input.length() - 1) {
 						String factorS = "";
-						char nc = input.charAt(i++);
-						while (Character.isLowerCase(c)) {
+						char nc = '\0';
+						while (true) {
+							if(nc == '\0') {
+								nc = c;
+								continue;
+							}
 							factorS = factorS + nc;
 							if (i >= input.length() - 1) break;
-							nc = input.charAt(i++);
+							nc = input.charAt(++i);
+							if(!(nc >= '0' && nc <= '9')) {
+								i--;
+								break;
+							}
 						}
-						if (!factorS.isEmpty()) factor = Integer.parseInt(factorS);
+						if(!factorS.isEmpty())
+							factor = Integer.parseInt(factorS);
+					}else {
+						//Need to add this to make sure it processes the next molecule correctly
+						i--;
 					}
 					//Save the new element
 					elements.add(new Element(elementName, factor));
@@ -169,6 +185,7 @@ public class FormulaBuilder {
 						}
 						if (i >= input.length() - 1) break;
 					}
+					//Add it to the correct side of the equation
 					if (rightTermActive)
 						rightTerm.add(new Molecule(molElements, coefficient));
 					else 

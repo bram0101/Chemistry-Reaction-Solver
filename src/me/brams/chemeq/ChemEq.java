@@ -13,26 +13,12 @@ THE USE OR OTHER DEALINGS IN THE SOFTWARE.*/
 
 package me.brams.chemeq;
 
-import me.brams.chemeq.formula.Formula;
-import me.brams.chemeq.formula.FormulaBuilder;
-import me.brams.chemeq.solver.Solver;
+import me.brams.chemeq.ui.InputWindow;
 
-/**
- * A test class to test the solver
- * @author Bram
- *
- */
-public class TestSolver {
-	
+public class ChemEq {
+
 	public static void main(String[] args) {
-		//String formula = "(K) + (Br2) -> (KBr)";
-		//String formula = "(FeS2) + (O2) -> (Fe2O3) + (SO2)";
-		//String formula = "(C6H6O) + (O2) -> (CO2) + (H2O)";
-		String formula = "(FeCl3) + (Na) -> (Fe) + (NaCl)";
-		Formula f = FormulaBuilder.getFormulaFromString(formula);
-		System.out.println(f.toString() + "\n");
-		Formula solved = Solver.solve(f);
-		System.out.println(solved.toString());
+		InputWindow window = new InputWindow();
 	}
-	
+
 }

@@ -62,6 +62,28 @@ public class Equation {
 	}
 	
 	/**
+	 * This method checks if the equation is the name as the eq variable
+	 */
+	@Override
+	public boolean equals(Object eq) {
+		if(!(eq instanceof Equation))
+			return false;
+		
+		if(!((Equation) eq).resultTerm.equals(resultTerm))
+			return false;
+		
+		if(((Equation) eq).terms.size() != terms.size())
+			return false;
+		
+		for(int i = 0; i < terms.size(); i++) {
+			if(!((Equation)eq).terms.get(i).equals(terms.get(i)))
+				return false;
+		}
+		
+		return true;
+	}
+	
+	/**
 	 * Convert the data this class holds to a string
 	 */
 	public String toString() {

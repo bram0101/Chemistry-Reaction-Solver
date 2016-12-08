@@ -11,28 +11,38 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTH
 DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 THE USE OR OTHER DEALINGS IN THE SOFTWARE.*/
 
-package me.brams.chemeq;
-
-import me.brams.chemeq.formula.Formula;
-import me.brams.chemeq.formula.FormulaBuilder;
-import me.brams.chemeq.solver.Solver;
+package me.brams.chemeq.util;
 
 /**
- * A test class to test the solver
+ * This class is to log everything
+ * 
  * @author Bram
  *
  */
-public class TestSolver {
-	
-	public static void main(String[] args) {
-		//String formula = "(K) + (Br2) -> (KBr)";
-		//String formula = "(FeS2) + (O2) -> (Fe2O3) + (SO2)";
-		//String formula = "(C6H6O) + (O2) -> (CO2) + (H2O)";
-		String formula = "(FeCl3) + (Na) -> (Fe) + (NaCl)";
-		Formula f = FormulaBuilder.getFormulaFromString(formula);
-		System.out.println(f.toString() + "\n");
-		Formula solved = Solver.solve(f);
-		System.out.println(solved.toString());
+public class Logger {
+
+	public static final int LEVEL_DEBUG = 0;
+	public static final int LEVEL_INFO = 1;
+	public static final int LEVEL_WARNING = 2;
+
+	public static int ignoreLevel = 1;
+	public static boolean showName = false;
+
+	public static void log(String log, int level) {
+		// This is a 'cheat' to get the caller's name.
+		// It's deprecated but I still use it.
+		@SuppressWarnings("deprecation")
+		String caller = sun.reflect.Reflection.getCallerClass(1).getName();
+		if (level < ignoreLevel) return;
+		if (showName) {
+			if (level == LEVEL_DEBUG)
+				System.out.println("[DEBUG: " + caller + "] " + log);
+			else if (level == LEVEL_INFO)
+				System.out.println("[INFO: " + caller + "] " + log);
+			else if (level == LEVEL_WARNING) System.out.println("[WARNING: " + caller + "] " + log);
+		} else {
+			System.out.println(log);
+		}
 	}
-	
+
 }

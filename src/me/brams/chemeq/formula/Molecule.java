@@ -105,4 +105,13 @@ public class Molecule {
 		return string;
 	}
 	
+	public String toSolveString() {
+		String string = ((int) coefficient) + "(";
+		for(Element e : elements) {
+			string = string + e.toString();
+		}
+		string = string + ")";
+		return string;
+	}
+	
 }

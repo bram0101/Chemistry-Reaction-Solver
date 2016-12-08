@@ -53,6 +53,22 @@ public class Term {
 	}
 	
 	/**
+	 * This method checks if the term is the same
+	 */
+	@Override
+	public boolean equals(Object object) {
+		if(object == null)
+			return false;
+		if(object == this)
+			return true;
+		if(!(object instanceof Term))
+			return false;
+		if(((Term)object).name == name && ((Term)object).factor == factor)
+			return true;
+		else return false;
+	}
+	
+	/**
 	 * Convert the data this class holds to a string
 	 */
 	public String toString() {

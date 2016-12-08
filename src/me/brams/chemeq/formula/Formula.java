@@ -77,11 +77,24 @@ public class Formula {
 		for(Molecule m : rightTerm) {
 			string = string + m.toString() + " + ";
 		}
-		string = string.substring(0, string.length() - 2) + "}, Elements: {";
+		string = string.substring(0, string.length() - 2) + "}, Elements: { ";
 		for(Element e : elements) {
 			string = string + e.toString() + ", ";
 		}
-		string = string.substring(0, string.length() - 1) + "} }";
+		string = string.substring(0, string.length() - 2) + " } }";
+		return string;
+	}
+	
+	public String getSolvedEquation() {
+		String string = "";
+		for(Molecule m : leftTerm) {
+			string = string + m.toSolveString() + " + ";
+		}
+		string = string.substring(0, string.length() - 2) + "-> ";
+		for(Molecule m : rightTerm) {
+			string = string + m.toSolveString() + " + ";
+		}
+		string = string.substring(0, string.length() - 3);
 		return string;
 	}
 	
