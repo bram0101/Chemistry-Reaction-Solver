@@ -107,11 +107,13 @@ public class InputWindow {
 				}*/
 				if (e.getKeyChar() == '\r' || e.getKeyChar() == '\n') {
 					e.consume();
-					Formula f = FormulaBuilder.getFormulaFromString(inputPane.getText());
-					System.out.println(f.toString() + "\n");
-					Formula solved = Solver.solve(f);
-					System.out.println(solved.toString());
 					try {
+						Formula f = FormulaBuilder.getFormulaFromString(inputPane.getText());
+						System.out.println(f.toString() + "\n");
+						Formula solved = Solver.solve(f);
+						System.out.println(solved.toString());
+						
+						
 						String s = solved.getSolvedEquation();
 						char lastC = ' ';
 						boolean sm = false;
@@ -142,8 +144,14 @@ public class InputWindow {
 							lastC = c;
 						}
 						doc2.insertString(doc2.getLength(), "\n", null);
-					} catch (BadLocationException e1) {
+					} catch (Exception e1) {
 						e1.printStackTrace();
+						try {
+							StyledDocument doc2 = resPane.getStyledDocument();
+							doc2.insertString(doc2.getLength(), "Error!", null);
+						}catch(Exception ex) {
+							ex.printStackTrace();
+						}
 					}
 					inputPane.setText("");
 				}

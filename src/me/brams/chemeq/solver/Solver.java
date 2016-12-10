@@ -221,6 +221,8 @@ public class Solver {
 			
 		}
 		
+		// Create a new formula instance and for every term, see if it has been solved, if so,
+		// set it
 		Formula result = new Formula(formula.getLeftTerm(), formula.getRightTerm(), formula.getElements());
 		for(int i = 0; i < result.getLeftTerm().size(); i++) {
 			char c = (char) (Term.startName + i);
@@ -230,7 +232,7 @@ public class Solver {
 		for(int i = 0; i < result.getRightTerm().size(); i++) {
 			char c = (char) (Term.startName + i + result.getLeftTerm().size());
 			if(solvedTerms.containsKey(c))
-				result.getLeftTerm().get(i).setCoefficient(solvedTerms.get(c));
+				result.getRightTerm().get(i).setCoefficient(solvedTerms.get(c));
 		}
 		return result;
 	}
